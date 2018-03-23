@@ -1,0 +1,127 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId "com.aliyun.sls"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "String", "SERVER_HOST", "\"100.100.100.10/\""
+            resValue("string", "avis", "安飞士租车")
+            resValue("string", "appid", "com.aliyun.sls")
+
+
+        }
+        debug {
+            minifyEnabled false
+//            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "String", "SERVER_HOST", "\"200.200.200.50/\""
+            resValue("string", "avis", "测试安飞士租车")
+            resValue("string", "appid", "com.aliyun.avis")
+        }
+    }
+//    productFlavors {
+//        AVIS_OW_1_AND330 {
+//            // gradle 3.0.0 以上需要有这个
+//            // dimension "app"
+//
+//            // 每个环境包名不同
+////            applicationId "com.lyl.dev"
+//            // 动态添加 string.xml 字段；
+//            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+//            resValue "string", "app_name", "官方安飞士租车"
+////            resValue "bool", "isrRank", 'false'
+//            // 动态修改 常量 字段
+//            buildConfigField "String", "UMENG_CHANNEL_VALUE", '"AVIS_OW_1_AND330"'
+//            // 修改 AndroidManifest.xml 里渠道变量
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "AVIS_OW_1_AND330"]
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "AVIS_OW_1_AND330", app_icon : "@drawable/relese_icon"]
+//
+//        }
+//        AVIS_XM_1_AND330 {}
+//        AVIS_VIVO_1_AND330 {}
+//        AVIS_OPPO_1_AND330 {}
+//        AVIS_MZ_1_AND330 {}
+//        AVIS_SX_1_AND330 {}
+//        AVIS_360SJZS_1_AND330 {}
+//        AVIS_BDSJZS_1_AND330 {}
+//        AVIS_HW_1_AND330 {}
+//        AVIS_QQLLQ_1_AND330 {}
+//        AVIS_YYB_1_AND330 {}
+//        AVIS_AL_1_AND330 {}
+//        AVIS_LX_1_AND330 {}
+//        AVIS_SG_1_AND330 {}
+//        AVIS_LS_1_AND330 {}
+//        AVIS_LT_1_AND330 {}
+//        AVIS_CZ_1_AND330 {}
+//
+//        AVIS_AD_YYB_1_AND330 {}
+//        AVIS_AD_YYB_2_AND330 {}
+//        AVIS_AD_YYB_3_AND330 {}
+//
+//        AVIS_JRTT_1_AND330 {}
+//        AVIS_JRTT_2_AND330 {}
+//        AVIS_JRTT_3_AND330 {}
+//        AVIS_JRTT_4_AND330 {}
+//        AVIS_JRTT_5_AND330 {}
+//        AVIS_JRTT_6_AND330 {}
+//        AVIS_JRTT_7_AND330 {}
+//        AVIS_JRTT_8_AND330 {}
+//        AVIS_JRTT_9_AND330 {}
+//        AVIS_JRTT_10_AND330 {}
+//
+//        AVIS_UCTT_1_AND330 {}
+//        AVIS_UCTT_2_AND330 {}
+//        AVIS_UCTT_3_AND330 {}
+//        AVIS_UCTT_4_AND330 {}
+//        AVIS_UCTT_5_AND330 {}
+//        AVIS_UCTT_6_AND330 {}
+//        AVIS_UCTT_7_AND330 {}
+//        AVIS_UCTT_8_AND330 {}
+//        AVIS_UCTT_9_AND330 {}
+//        AVIS_UCTT_10_AND330 {}
+//
+//        AVIS_DC_1_AND330 {}
+//        AVIS_DC_2_AND330 {}
+//        AVIS_DC_3_AND330 {}
+//        AVIS_DC_4_AND330 {}
+//        AVIS_DC_5_AND330 {}
+//        AVIS_DC_6_AND330 {}
+//
+//        AVIS_SM_1_AND330 {}
+//
+//    }
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            output.outputFile = new File(
+//                    output.outputFile.parent,
+//                    output.outputFile.name.replace(output.outputFile.name, variant.productFlavors[0].name + ".apk"))
+//        }
+//    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    compile 'com.aliyun.dpa:oss-android-sdk:2.4.2'
+    testCompile 'junit:junit:4.12'
+    compile project(':aliyun-sls-android-sdk')
+}
