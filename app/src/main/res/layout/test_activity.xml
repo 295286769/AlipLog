@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="dataBean"
+            type="com.aliyun.sls.kotlin.model.DataBean"/>
+        <variable
+            name="isLarge"
+            type="boolean"/>
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener"/>
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{dataBean.name}"
+            android:onClick="@{(view)->dataBean.onClick(dataBean.age)}"
+            android:id="@+id/tvName"/>
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{String.valueOf(dataBean.age)}"
+            android:textSize="@{isLarge? @dimen/fab_margin : @dimen/button_text_size}"
+        android:id="@+id/tvAge"/>
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{dataBean.height}"
+            android:onClick="@{onClick}"
+        android:id="@+id/tvHeight"/>
+        <com.example.common.view.RefreshLoadMoreView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list"/>
+        <ViewStub
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inflatedId="@+id/userinflateid"
+            android:id="@+id/view_stub"
+            android:layout="@layout/emty_view"/>
+
+
+    </LinearLayout>
+
+</layout>

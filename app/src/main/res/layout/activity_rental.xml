@@ -2,5 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_text"
+        android:gravity="center"
+        android:text="firstKotlin"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_databinding"
+        android:gravity="center"
+        android:text="firstDatabinding"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_java_databinding"
+        android:gravity="center"
+        android:text="javaDatabinding"/>
+
 
 </LinearLayout>

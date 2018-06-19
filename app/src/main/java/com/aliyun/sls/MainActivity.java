@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import com.aliyun.sls.android.sdk.ClientConfiguration;
 import com.aliyun.sls.android.sdk.LOGClient;
 import com.aliyun.sls.android.sdk.LogException;
 import com.aliyun.sls.android.sdk.SLSLog;
-import com.aliyun.sls.android.sdk.core.auth.PlainTextAKSKCredentialProvider;
 import com.aliyun.sls.android.sdk.core.auth.StsTokenCredentialProvider;
 import com.aliyun.sls.android.sdk.model.Log;
 import com.aliyun.sls.android.sdk.model.LogGroup;
@@ -24,9 +22,11 @@ import com.aliyun.sls.android.sdk.core.callback.CompletedCallback;
 import com.aliyun.sls.android.sdk.utils.IPService;
 import com.aliyun.sls.android.sdk.request.PostLogRequest;
 import com.aliyun.sls.android.sdk.result.PostLogResult;
+import com.aliyun.sls.rentalcar.BaseActivity;
+import com.aliyun.sls.rentalcar.utils.MuUtils;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     public final static int HANDLER_MESSAGE_UPLOAD_FAILED = 00011;
     public final static int HANDLER_MESSAGE_UPLOAD_SUCCESS = 00012;
@@ -84,6 +84,13 @@ public class MainActivity extends AppCompatActivity {
                 asyncUploadLog(source_ip);
             }
         });
+//        Toast.makeText(mContext, MuUtils.getCurrentClassName(), Toast.LENGTH_SHORT).show();
+//        try {
+//            Thread.sleep(1000);
+//            Toast.makeText(mContext, MuUtils.getCurrentMethodName(), Toast.LENGTH_SHORT).show();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -92,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
          *  推荐使用的方式，直接调用异步接口，通过callback 获取回调信息
          */
     private void asyncUploadLog(@Nullable String ip) {
+        Toast.makeText(mContext, MuUtils.getCurrentClassName(), Toast.LENGTH_SHORT).show();
+        try {
+            Thread.sleep(1000);
+            Toast.makeText(mContext, MuUtils.getCurrentMethodName(), Toast.LENGTH_SHORT).show();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 //        移动端是不安全环境，不建议直接使用阿里云主账号ak，sk的方式。建议使用STS方式。具体参见
 //        https://help.aliyun.com/document_detail/62681.html
