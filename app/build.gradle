@@ -2,32 +2,72 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
+def keystoreFilepath = ''
+def keystorePSW = ''
+def keystoreAlias = ''
+def keystoreAliasPSW = ''
+// default keystore file, PLZ config file path in local.properties
+def keyfile = file('s.keystore.temp')
+
+Properties properties = new Properties()
+// local.properties file in the root director
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+keystoreFilepath = properties.getProperty("keystore.path")
+
+
+if (keystoreFilepath) {
+    keystorePSW = properties.getProperty("keystore.password")
+    keystoreAlias = properties.getProperty("keystore.alias")
+    keystoreAliasPSW = properties.getProperty("keystore.alias_password")
+    keyfile = file(keystoreFilepath)
+}
+
 
 android {
     signingConfigs {
         debugconfig {
-            keyAlias 'avis'
-            keyPassword 'huang295286769'
-            storeFile file('E:/stodiodemo/keystore/gaodekey/keystore.jks')
-            storePassword 'huang295286769'
+            keyAlias keystoreAlias
+            keyPassword keystoreAliasPSW
+            storeFile keyfile
+            storePassword keystorePSW
         }
     }
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOL_SVERSION as String
     defaultConfig {
         applicationId "com.aliyun.sls"
-        minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME as String
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dataBinding {
         enabled true
     }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+        //关闭预编译
+        preDexLibraries = false
+    }
+    //打包忽略掉第三方jar相同的文件
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
     buildTypes {
         release {
-            manifestPlaceholders = [baidu_key: "3558915cbbd3d2a2bda43284524d98be"]
+//            applicationId "com.aliyun.sls"
+            manifestPlaceholders = [gaode_key: properties.getProperty("gaodekey.release")]
 //            applicationIdSuffix "com.aliyun.sls"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -37,17 +77,25 @@ android {
 //            resValue("string", "appid", "com.aliyun.sls")
 
 //            manifestPlaceholders = [app_icon: "@mipmap/ic_launcher"]
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
         }
         debug {
-            manifestPlaceholders = [baidu_key: "3558915cbbd3d2a2bda43284524d98be"]
-            minifyEnabled false
+//            applicationId "com.aliyun.debug"
+            manifestPlaceholders = [gaode_key: properties.getProperty("gaodekey.debug")]
+            minifyEnabled true
 //            buildConfigField "boolean", "LOG_DEBUG", "false"
 //            buildConfigField "String", "SERVER_HOST", "\"200.200.200.50/\""
             resValue("string", "avis", "测试安飞士租车")
 //            resValue("string", "appid", "com.aliyun.avis")
 //            manifestPlaceholders = [app_icon: "@mipmap/relese_icon"]
-            signingConfig signingConfigs.debugconfig
+            //签名文件存在，则签名
+            if (keyfile.exists()) {
+                signingConfig signingConfigs.debugconfig
+            }else {
+            }
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
     productFlavors {
@@ -56,7 +104,7 @@ android {
             // dimension "app"
 
             // 每个环境包名不同
-//            applicationId "com.lyl.dev"
+            applicationId "com.lyl.dev"
             // 动态添加 string.xml 字段；
             // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
 //            resValue ("string", "avis", "官方安飞士租车")
@@ -138,6 +186,9 @@ android {
                     output.outputFile.parent,
                     output.outputFile.name.replace(output.outputFile.name, variant.productFlavors[0].name + ".apk"))
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 kapt {

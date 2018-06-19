@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="@string/appid">
+    package="com.aliyun.sls">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -48,7 +48,7 @@
         </activity>
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="${baidu_key}"/>
+            android:value="${gaode_key}"/>
 
         <meta-data
             android:name="CHANNEL"
