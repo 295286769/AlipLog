@@ -55,6 +55,7 @@
             android:value="${CHANNEL_VALUE}" />
 
 
+        <activity android:name=".rentalcar.activity.TrainActivity" />
         <activity android:name=".kotlin.activity.FirstKotlinActivity" />
         <activity android:name=".kotlin.activity.DataBindingActivity"/>
         <activity android:name=".rentalcar.activity.MyActivityBinding"/>

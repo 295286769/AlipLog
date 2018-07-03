@@ -20,6 +20,25 @@
         android:id="@+id/btn_java_databinding"
         android:gravity="center"
         android:text="javaDatabinding"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_airport"
+        android:gravity="center"
+        android:text="机场"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_train"
+        android:gravity="center"
+        android:text="火车站"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_ditie"
+        android:gravity="center"
+        android:text="地铁"/>
+
 
 
 </LinearLayout>

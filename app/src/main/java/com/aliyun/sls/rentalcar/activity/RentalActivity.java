@@ -1,5 +1,6 @@
 package com.aliyun.sls.rentalcar.activity;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -27,7 +28,6 @@ import com.aliyun.sls.android.sdk.logutils.Logger;
 import com.aliyun.sls.kotlin.activity.DataBindingActivity;
 import com.aliyun.sls.kotlin.activity.FirstKotlinActivity;
 import com.aliyun.sls.rentalcar.BaseActivity;
-import com.aliyun.sls.rentalcar.brodcast.BlutoothBrocastReceiver;
 import com.aliyun.sls.rentalcar.factory.CompanyAbtrable.CompanyAbstract;
 import com.aliyun.sls.rentalcar.factory.control.avis.AotoCar;
 import com.aliyun.sls.rentalcar.factory.control.avis.AvisCompanyControl;
@@ -35,6 +35,7 @@ import com.aliyun.sls.rentalcar.factory.control.avis.Passat;
 import com.aliyun.sls.rentalcar.factory.control.didi.DDCompany;
 import com.aliyun.sls.rentalcar.factory.control.didi.Porsche;
 import com.aliyun.sls.rentalcar.utils.MuUtils;
+import com.aliyun.sls.utils.ActivityUtils;
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
@@ -54,14 +55,33 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by huangweishui on 2018/3/20.
  */
 
 public class RentalActivity extends BaseActivity implements PoiSearch.OnPoiSearchListener {
+
+    @BindView(R.id.btn_text)
+    Button btnText;
+    @BindView(R.id.btn_databinding)
+    Button btnDatabinding;
+    @BindView(R.id.btn_java_databinding)
+    Button btnJavaDatabinding;
+    @BindView(R.id.btn_airport)
+    Button btnAirport;
+    @BindView(R.id.btn_train)
+    Button btnTrain;
+    @BindView(R.id.btn_ditie)
+    Button btnDitie;
     private Button btn_text;
     private Button btn_databinding;
     private Button btn_java_databinding;
+    private Button btn_airport;
+    private Button btn_train;
+    private Button btn_ditie;
     private BluetoothAdapter adapter;
     private List<String> strings = new ArrayList<>();
     private Handler handler = new Handler();
@@ -71,14 +91,15 @@ public class RentalActivity extends BaseActivity implements PoiSearch.OnPoiSearc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rental);
+        ButterKnife.bind(this);
         try {
             tryException();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String[] permissions = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest
+        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest
                 .permission.READ_CONTACTS
-                , android.Manifest.permission.CALL_PHONE};
+                , Manifest.permission.CALL_PHONE};
         PermissionUtil.requestPermisions(this, 1, permissions, new
                 PermissionUtil.RequestPermissionListener() {
 
@@ -99,10 +120,13 @@ public class RentalActivity extends BaseActivity implements PoiSearch.OnPoiSearc
 
         EventBus.getDefault().register(this);
         IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(new BlutoothBrocastReceiver(), intentFilter);
+//        registerReceiver(new BlutoothBrocastReceiver(), intentFilter);
         btn_text = (Button) findViewById(R.id.btn_text);
         btn_databinding = (Button) findViewById(R.id.btn_databinding);
         btn_java_databinding = (Button) findViewById(R.id.btn_java_databinding);
+        btn_airport = (Button) findViewById(R.id.btn_airport);
+        btn_train = (Button) findViewById(R.id.btn_train);
+        btn_ditie = (Button) findViewById(R.id.btn_ditie);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         options.inSampleSize = 2;
@@ -232,8 +256,29 @@ public class RentalActivity extends BaseActivity implements PoiSearch.OnPoiSearc
             }
         }
         search();
+        setPress();
 
+    }
 
+    private void setPress() {
+        btn_airport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityUtils.startActivity(RentalActivity.this, 1);
+            }
+        });
+        btn_train.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityUtils.startActivity(RentalActivity.this, 2);
+            }
+        });
+        btn_ditie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityUtils.startActivity(RentalActivity.this, 3);
+            }
+        });
     }
 
     private void search() {
@@ -241,9 +286,10 @@ public class RentalActivity extends BaseActivity implements PoiSearch.OnPoiSearc
 //keyWord表示搜索字符串，
 //第二个参数表示POI搜索类型，二者选填其一，选用POI搜索类型时建议填写类型代码，码表可以参考下方（而非文字）
 //cityCode表示POI搜索区域，可以是城市编码也可以是城市名称，也可以传空字符串，空字符串代表全国在全国范围内进行搜索
-        query.setPageSize(1000000);// 设置每页最多返回多少条poiitem
-        query.setPageNum(1);//设置查询页码
-        PoiSearch  poiSearch = new PoiSearch(this, query);
+        query.setPageSize(10000);// 设置每页最多返回多少条poiitem
+        query.setPageNum(2);//设置查询页码
+        query.setDistanceSort(true);
+        PoiSearch poiSearch = new PoiSearch(this, query);
         poiSearch.setOnPoiSearchListener(this);
         poiSearch.searchPOIAsyn();
     }
@@ -516,7 +562,14 @@ public class RentalActivity extends BaseActivity implements PoiSearch.OnPoiSearc
 
     @Override
     public void onPoiSearched(PoiResult poiResult, int i) {
-        Logger.i("TTT", poiResult.toString());
+        List<PoiItem> poiItems = poiResult.getPois();
+        if (poiItems != null) {
+            for (int j = 0; j < poiItems.size(); j++) {
+                Logger.i("TTT", poiItems.get(j).getTitle());
+            }
+        }
+
+
     }
 
     @Override

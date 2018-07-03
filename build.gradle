@@ -11,6 +11,10 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -19,6 +23,13 @@ buildscript {
 }
 
 allprojects {
+    // 加上这个
+    tasks.withType(JavaCompile) {
+        //使在一个单独的守护进程编译
+        options.fork = true
+        //增量编译
+        options.incremental = true
+    }
     repositories {
         jcenter()
         mavenCentral()

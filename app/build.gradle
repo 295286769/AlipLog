@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.jakewharton.butterknife'
 
 def keystoreFilepath = ''
 def keystorePSW = ''
@@ -83,17 +85,17 @@ android {
         debug {
 //            applicationId "com.aliyun.debug"
             manifestPlaceholders = [gaode_key: properties.getProperty("gaodekey.debug")]
-            minifyEnabled true
+            minifyEnabled false
 //            buildConfigField "boolean", "LOG_DEBUG", "false"
 //            buildConfigField "String", "SERVER_HOST", "\"200.200.200.50/\""
             resValue("string", "avis", "测试安飞士租车")
 //            resValue("string", "appid", "com.aliyun.avis")
 //            manifestPlaceholders = [app_icon: "@mipmap/relese_icon"]
             //签名文件存在，则签名
-            if (keyfile.exists()) {
+//            if (keyfile.exists()) {
                 signingConfig signingConfigs.debugconfig
-            }else {
-            }
+//            }else {
+//            }
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
         }
@@ -104,7 +106,7 @@ android {
             // dimension "app"
 
             // 每个环境包名不同
-            applicationId "com.lyl.dev"
+//            applicationId "com.lyl.dev"
             // 动态添加 string.xml 字段；
             // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
 //            resValue ("string", "avis", "官方安飞士租车")
