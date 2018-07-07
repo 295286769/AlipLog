@@ -1,4 +1,9 @@
-apply plugin: 'com.android.library'
+if(ISMODLE.toBoolean()){
+    apply plugin: 'com.android.application'
+
+}else {
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
@@ -24,10 +29,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets{
+        main{
+            if(ISMODLE.toBoolean()){
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            }else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                //集成开发模式下排除debug文件夹中的所有Java文件
+                java {
+                    exclude 'debug/**'
+                    exclude 'module/**'
+                }
+
+            }
+        }
+    }
 
     lintOptions {
         abortOnError false
     }
+
 }
 
 dependencies {

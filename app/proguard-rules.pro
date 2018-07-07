@@ -212,6 +212,6 @@
 
 -dontwarn rx.**
 -keep class rx.**{*;}
-
+ -keep public class com.alibaba.android.arouter.routes.**{*;}
 #不混淆第三方的jar包
 #-keep class org.jetbrains.kotlin.**{*;}

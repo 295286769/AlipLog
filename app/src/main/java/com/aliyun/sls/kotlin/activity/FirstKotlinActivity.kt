@@ -7,6 +7,8 @@ import android.os.Handler
 import android.os.Message
 import android.widget.ImageView
 import com.adhoc.fa
+import com.alibaba.android.arouter.facade.annotation.Param
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.aliyun.sls.MainActivity
 import com.aliyun.sls.R
 import com.aliyun.sls.android.sdk.logutils.Logger
@@ -17,8 +19,10 @@ import com.aliyun.sls.rentalcar.activity.RentalActivity
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
-
+@Route(path = "/kotlin/FirstKotlinActivity")
 class FirstKotlinActivity<T> : KotlinActivity(), com.aliyun.sls.kotlin.inteface.FirstInterface {
+    @Param                   // 声明之后，ARouter会从URL中解析对应名字的参数，并按照类型存入Bundle
+     var key:String="";
     override fun getAge(age: Int) {
 
         com.aliyun.sls.android.sdk.logutils.Logger.i("AVIS", "avis:age+" + java.text.MessageFormat.format("格式化字符串:{0}({1})", "字符串1", "字符串2"))
@@ -49,7 +53,7 @@ class FirstKotlinActivity<T> : KotlinActivity(), com.aliyun.sls.kotlin.inteface.
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.aliyun.sls.R.layout.activity_first_kotlin)
-
+key=intent.getStringExtra("key")
 
         showToast("成功")
 //        var intent = Intent(this, RentalActivity::class.java)
