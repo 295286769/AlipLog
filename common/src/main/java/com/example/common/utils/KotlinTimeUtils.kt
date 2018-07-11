@@ -18,7 +18,7 @@ class KotlinTimeUtils {
             if (_ms <= 0) {
                 return ""
             }
-            var HMStime = ""
+            var hMStime = ""
             _ms /= 1000
             if (_ms <= 0) {
                 return ""
@@ -57,12 +57,12 @@ class KotlinTimeUtils {
                 sedStr = "0" + sedStr
             }
             if (!TextUtils.isEmpty(hourStr)) {
-                HMStime = "$hourStr:$mintStr:$sedStr"
+                hMStime = "$hourStr:$mintStr:$sedStr"
             } else {
-                HMStime = mintStr + ":" + sedStr
+                hMStime = mintStr + ":" + sedStr
             }
 
-            return HMStime
+            return hMStime
         }
     }
 

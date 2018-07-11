@@ -6,6 +6,7 @@ import android.content.Context;
 import com.adhoc.adhocsdk.AdhocTracker;
 import com.adhoc.config.AdhocConfig;
 import com.aliyun.sls.android.sdk.logutils.AppUtils;
+import com.example.common.*;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 

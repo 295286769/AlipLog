@@ -1,4 +1,10 @@
-apply plugin: 'com.android.library'
+
+if(ismodule.toBoolean()){
+    apply plugin: 'com.android.application'
+
+}else {
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
