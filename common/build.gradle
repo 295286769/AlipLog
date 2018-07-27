@@ -24,6 +24,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            if (ismodule.toBoolean()) {
+            } else {
+//                //集成开发模式下排除debug文件夹中的所有Java文件
+//                java {
+//                    exclude 'debug/**'
+//                }
+            }
+        }
+    }
 }
 kapt {
     generateStubs = true
@@ -46,9 +57,11 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.amap.api:search:latest.integration'
     compile 'com.jakewharton:butterknife:8.4.0'
-    kapt "com.android.databinding:compiler:2.2.2"
+    kapt "com.android.databinding:compiler:2.3.3"
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     compile files('libs/alipaySdk-20170922.jar')
+    compile 'com.alibaba:arouter-api:1.2.1.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
 
 }

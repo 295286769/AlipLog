@@ -22,6 +22,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.adhoc.adhocsdk.AdhocTracker;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.aliyun.sls.BuildConfig;
 import com.aliyun.sls.R;
 import com.aliyun.sls.android.sdk.logutils.Logger;
@@ -61,7 +63,7 @@ import butterknife.ButterKnife;
 /**
  * Created by huangweishui on 2018/3/20.
  */
-
+@Route(path="/rentalcar/RentalActivity")
 public class RentalActivity extends BaseActivity implements PoiSearch.OnPoiSearchListener {
 
     @BindView(R.id.btn_text)
@@ -177,8 +179,9 @@ public class RentalActivity extends BaseActivity implements PoiSearch.OnPoiSearc
         btn_databinding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RentalActivity.this, DataBindingActivity.class);
-                startActivity(intent);
+                ARouter.getInstance().build("/kotlin/FirstKotlinActivity").withString("key","value").navigation();
+//                Intent intent = new Intent(RentalActivity.this, DataBindingActivity.class);
+//                startActivity(intent);
 //                finish();
 //                Toast.makeText(RentalActivity.this, mContext.getClass().getName(), Toast.LENGTH_SHORT).show();
 //                Logger.i("TTT", "stacks" + MuUtils.getCurrentStacktraceInfo());

@@ -1,12 +1,11 @@
 package com.aliyun.sls;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.adhoc.adhocsdk.AdhocTracker;
 import com.adhoc.config.AdhocConfig;
 import com.aliyun.sls.android.sdk.logutils.AppUtils;
-import com.example.common.*;
+import debug.BaseApication;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -14,7 +13,7 @@ import com.squareup.leakcanary.RefWatcher;
  * Created by huangweishui on 2018/3/23.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends BaseApication {
     public static Context mContext;
     private static RefWatcher watcher;
 

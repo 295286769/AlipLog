@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jakewharton.butterknife'
 
 def keystoreFilepath = ''
@@ -201,7 +201,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    kapt "com.android.databinding:compiler:2.2.2"
+    kapt "com.android.databinding:compiler:2.3.3"
     compile project(':aliyun-sls-android-sdk')
     compile project(':common')
 }
