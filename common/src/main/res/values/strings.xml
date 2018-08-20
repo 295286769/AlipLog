@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name_common">common</string>
+    <string name="rmb_user_name">我是%1$s 现在%2$m</string>
 </resources>

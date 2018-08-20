@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.aliyun.sls">
+    package="com.srx.huangshang">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -28,16 +28,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name=".MyApplication"
+        android:name="com.srx.huangshang.MyApplication"
         android:allowBackup="true"
         android:icon="${app_icon}"
         android:label="@string/avis"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label,android:allowBackup,android:supportsRtl,android:icon">
-        <activity android:name=".MainActivity" />
         <activity
-            android:name=".rentalcar.activity.RentalActivity"
+            android:name="com.srx.huangshang.activity.StartActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
             <intent-filter>
@@ -55,10 +54,10 @@
             android:value="${CHANNEL_VALUE}" />
 
 
-        <activity android:name=".rentalcar.activity.TrainActivity" />
-        <activity android:name=".kotlin.activity.FirstKotlinActivity" />
-        <activity android:name=".kotlin.activity.DataBindingActivity"/>
-        <activity android:name=".rentalcar.activity.MyActivityBinding"/>
+        <activity android:name="com.srx.huangshang.rentalcar.activity.TrainActivity" />
+        <!--<activity android:name=".kotlin.activity.FirstKotlinActivity" />-->
+        <!--<activity android:name=".kotlin.activity.DataBindingActivity"/>-->
+        <!--<activity android:name=".rentalcar.activity.MyActivityBinding"/>-->
 
 
         <activity

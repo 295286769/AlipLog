@@ -13,8 +13,8 @@ class KotlinTimeUtils {
      * @return
      */
     companion object{
-        fun ms2HMS(_ms: Long): String {
-            var _ms = _ms
+        fun ms2HMS(ms: Long): String {
+            var _ms = ms
             if (_ms <= 0) {
                 return ""
             }

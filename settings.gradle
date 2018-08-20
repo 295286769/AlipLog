@@ -1,1 +1,1 @@
-include ':app', ':aliyun-sls-android-sdk', ':common'
+include ':app', ':sanrenxing', ':common'

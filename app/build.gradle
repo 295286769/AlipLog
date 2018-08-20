@@ -37,7 +37,7 @@ android {
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOL_SVERSION as String
     defaultConfig {
-        applicationId "com.aliyun.sls"
+        applicationId "com.srx.sex"
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode VERSION_CODE as int
@@ -48,7 +48,6 @@ android {
         enabled true
     }
     dexOptions {
-        incremental true
         javaMaxHeapSize "4g"
         //关闭预编译
         preDexLibraries = false
@@ -197,13 +196,12 @@ kapt {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    annotationProcessor "com.android.databinding:compiler:2.3.3"
-    compile project(':aliyun-sls-android-sdk')
-    compile project(':common')
+//    compile fileTree(include: ['*.jar'], dir: 'libs')
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+    kapt "com.android.databinding:compiler:$gradle_version"
+    compile project(':sanrenxing')
 }
 repositories {
     mavenCentral()

@@ -1,6 +1,5 @@
 package com.example.common.activity
 
-import android.databinding.DataBindingUtil
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 
@@ -10,13 +9,13 @@ import android.support.v7.app.AppCompatActivity
 abstract class BaseKotlinActivity: AppCompatActivity() {
     lateinit var mContext: android.content.Context
     var age:Int=-1
-    lateinit var baseDataBinding:Any
+//    lateinit var baseDataBinding:Any
 
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(com.aliyun.sls.R.layout.activity_first_kotlin)
-        baseDataBinding= DataBindingUtil.setContentView(this,getBinding())
+//        baseDataBinding= DataBindingUtil.setContentView(this,getBinding())
         mContext=this
         initData()
         initView()

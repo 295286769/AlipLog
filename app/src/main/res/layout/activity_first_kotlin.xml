@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.aliyun.sls.kotlin.activity.FirstKotlinActivity">
+    tools:context="com.srx.huangshang.kotlin.activity.FirstKotlinActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,12 +37,12 @@
         android:id="@+id/tv_name"
         android:layout_below="@+id/tv_text"/>
 
-    <com.aliyun.sls.kotlin.view.FirstKotlinView
+    <com.srx.huangshang.kotlin.view.FirstKotlinView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/firstKotlinView"
         android:layout_below="@+id/tv_name"/>
-    <com.aliyun.sls.rentalcar.view.MyView
+    <com.srx.huangshang.rentalcar.view.MyView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/myView"

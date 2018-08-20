@@ -7,6 +7,6 @@
         android:layout_height="wrap_content"
         android:text="暂无数据"
         android:layout_gravity="center"
-        android:textColor="@color/stand_red"/>
+        />
 
 </LinearLayout>
